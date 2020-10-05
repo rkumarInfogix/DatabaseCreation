@@ -631,5 +631,10 @@ as $$
 select TestSchema."TestFun With Space"($1 , $2);
 $$ language sql;
 
-
+CREATE OR REPLACE FUNCTION TestSchema.TestFunTableColumnTypeReturn()
+RETURNS varchar
+stable
+as $$
+     return TestSchema.testtabledept.deptno %TYPE ;
+$$ language  plpythonu;
 
