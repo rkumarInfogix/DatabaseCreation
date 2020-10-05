@@ -1,0 +1,23 @@
+DbUser=SYSTEM
+DBPassword=Infogix@1240
+DBURL=jdbc:sap://10.2.20.182:39015
+DBDRIVER=com.sap.db.jdbc.driver
+
+
+select * from "SYS"."M_DATABASES"
+
+CREATE DATABASE TestCatalog SYSTEM USER PASSWORD "Infogix@1240";
+
+
+select * from "SYS"."M_DATABASES"
+
+ALTER SYSTEM STOP DATABASE TestCatalog1
+drop database TestCatalog1
+
+{{*ls.appDataDir*}}/lib/java/db/drivers/hana
+
+jdbc:sap://10.2.20.182:39015
+
+CREATE USER harvestertestuser02  PASSWORD Harvestertestuser01 NO FORCE_FIRST_PASSWORD_CHANGE;
+
+jdbc:sap://10.2.20.182:39044/?databaseName=testcat&encrypt=true

@@ -1,0 +1,18 @@
+Table with Space
+
+2 or 3 columns
+
+Creating Data
+Column with Space
+
+Trigger Rename 
+
+Trigger with
+
+In Trigger Name
+Remove 
+
+drop if exists
+
+
+

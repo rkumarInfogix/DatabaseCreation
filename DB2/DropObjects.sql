@@ -1,0 +1,223 @@
+CREATE OR REPLACE PROCEDURE DropObjects 
+BEGIN
+ 
+ --***************DROP TRIGGERS*****************************
+ BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('"TestTrigAllDataTypes With Space" trigger does not exist'); 
+ END;
+   
+ EXECUTE IMMEDIATE 'DROP TRIGGER  harvestertestuser."TestTrigAllDataTypes With Space"';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestTrigAllDataTypes trigger does not exist'); 
+ END;
+   
+ EXECUTE IMMEDIATE 'DROP TRIGGER  TestTrigAll_Data_Types';
+END;
+
+--***************DROP FUNCTION*****************************
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestFunCurrentDate FUNCTION does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP FUNCTION  TestFunCurrentDate';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('"TestFun With Space" FUNCTION does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP FUNCTION  "TestFun With Space"';
+END;
+
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestFunSumTableColumn FUNCTION does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP FUNCTION  TestFunSumTableColumn';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestFunReturnProductIdFromView FUNCTION does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP FUNCTION  TestFunReturnProductIdFromView';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestFunReturn_Emp_Dept FUNCTION does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP FUNCTION  TestFunReturn_Emp_Dept';
+END;
+
+--***************DROP PROCEDURE*****************************
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestProcProductBrand PROCEDURE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP PROCEDURE  TestProcProductBrand';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestProcProductCategory PROCEDURE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP PROCEDURE  TestProcProductCategory';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('harvestertestuser.TestProcSumTableColumn PROCEDURE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP PROCEDURE  harvestertestuser.TestProcSumTableColumn';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('harvestertestuser.TestProcSumTable_Column_Arguments PROCEDURE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP PROCEDURE  harvestertestuser.TestProcSumTable_Column_Arguments';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('harvestertestuser.TestProcWithMoreThan4000Char PROCEDURE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP PROCEDURE  harvestertestuser.TestProcWithMoreThan4000Char';
+END;
+
+--***************DROP VIEW*****************************
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('harvestertestuser."TestView With Space" VIEW does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP VIEW  harvestertestuser."TestView With Space"';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('harvestertestuser.TestView VIEW does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP VIEW  harvestertestuser.TestView';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestView_Emp_Dept VIEW does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP VIEW  TestView_Emp_Dept';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestViewProductBrand VIEW does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP VIEW  TestViewProductBrand';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestViewProductCategory VIEW does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP VIEW  TestViewProductCategory';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestViewStar VIEW does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP VIEW  TestViewStar';
+END;
+
+--***************DROP TABLES*****************************
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('"TestTable With Space" TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE  "TestTable With Space"';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('harvestertestuser.TestTable_All_Data_Types TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE harvestertestuser.TestTable_All_Data_Types';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('testcat.harvestertestuser.TestTableDept TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE testcat.harvestertestuser.TestTableDept';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestTableEmployee TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE TestTableEmployee';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestTableProducts TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE TestTableProducts';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestSchemaOther.TestTableBrands TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE TestSchemaOther.TestTableBrands';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('TestSchemaOther.TestTableCategories TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE TestSchemaOther.TestTableCategories';
+END;
+
+BEGIN	
+ DECLARE CONTINUE HANDLER FOR SQLSTATE '42704'
+ BEGIN
+	CALL DBMS_OUTPUT.PUT_LINE('testcat.TestSchemaOther.TestTableDept TABLE does not exist'); 
+ END;
+   EXECUTE IMMEDIATE 'DROP TABLE testcat.TestSchemaOther.TestTableDept';
+END;
+
+END
