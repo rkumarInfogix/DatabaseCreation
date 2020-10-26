@@ -1,7 +1,7 @@
 
 CREATE DATABASE TestCatalog SYSTEM USER PASSWORD "Infogix@1240";
 
-CREATE USER harvestortestuser  PASSWORD Harvestortestuser01 NO FORCE_FIRST_PASSWORD_CHANGE;
+CREATE USER harvestertestuser  PASSWORD Harvestertestuser2 NO FORCE_FIRST_PASSWORD_CHANGE;
 
 GRANT DATA ADMIN TO  harvestortestuser;
 
