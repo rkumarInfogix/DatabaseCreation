@@ -994,15 +994,14 @@ BEGIN
    RETURN TRUNC(SYSDATE);
 END;
 
-CREATE OR REPLACE FUNCTION HARVESTERTESTUSER.TestFunReturn_Emp_Dept (p_empno number)  
+CREATE OR REPLACE FUNCTION HARVESTERTESTUSER.TestFunReturn_Emp_Dept(p_empno number)  
 RETURN VARCHAR2  
 
 IS 
- result VARCHAR2(30);
+ result VARCHAR2(100);
 BEGIN
-SELECT
-
-        "Department Name" || "Department Location" || TestFunCurrentDate() DepartmentLocation  into result
+SELECT  "Department Name" || "Department Location" || TestFunCurrentDate() DepartmentLocation 
+        into result
         from TestTableDept dept , 
         TestTableEmployee emp 
         where emp."department id"= dept.deptno AND "Department Name"!='Services' and ename != ' sam '
