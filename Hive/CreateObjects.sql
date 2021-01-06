@@ -386,11 +386,11 @@ create or replace View TestSchema.`TestView_With_Underscore`(
       columndate,
     columndatetime) as 
     select 
-    columnchar,
-    `Column Varchar`,
-     columnbinary,
-      columndate,
-    columndatetime  from TestSchema.`TestTable_With_Underscore`;
+    a.columnchar,
+    a.`Column Varchar`,
+     a.columnbinary,
+      a.columndate,
+    a.columndatetime  from TestSchema.`TestTable_With_Underscore` a;
 	
 	
 	
@@ -410,41 +410,41 @@ create  or replace View TestSchema.TestView(
     ColumnDate ,
     ColumnDateTime ) as 
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnBinary ,
-    ColumnBoolean ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnDate ,
-    ColumnDateTime   from TestSchema.TestTable_All_Data_Types;
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnBinary ,
+    a.ColumnBoolean ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnDate ,
+    a.ColumnDateTime   from TestSchema.TestTable_All_Data_Types a;
 
 	
 	    
         CREATE  or replace VIEW TestSchema.TestView_Emp_Dept as SELECT
-            empno,
-            ename,
-        job,`Department Name` 
+            emp.empno,
+            emp.ename,
+        emp.job,dept.`Department Name` 
         from TestSchema.TestTableDept dept , 
         TestSchema.TestTableEmployee emp 
-        where emp.`department id`= dept.deptno AND `Department Name`!='Services' and ename != ' sam ';
+        where emp.`department id`= dept.deptno AND dept.`Department Name`!='Services' and emp.ename != ' sam ';
 		
 		
 		
 create  or replace view TestSchema.TestViewProductBrand as 
-select product_id, product_name, brand_name,model_year , list_price , category_id from TestSchema.TestTableProducts products , TestSchemaOther.TestTableBrands brands
+select products.product_id, products.product_name, brands.brand_name,products.model_year , products.list_price , products.category_id from TestSchema.TestTableProducts products , TestSchemaOther.TestTableBrands brands
  where products.brand_id = brands.brand_id;
  
  
  
 create  or replace view TestSchema.TestViewProductCategory as 
-select product_id, product_name, brand_name,model_year , list_price , category_name from TestSchema.TestViewProductBrand vwProducts , TestSchemaOther.TestTableCategories categ 
+select vwProducts.product_id, vwProducts.product_name, vwProducts.brand_name,vwProducts.model_year , vwProducts.list_price , categ.category_name from TestSchema.TestViewProductBrand vwProducts , TestSchemaOther.TestTableCategories categ 
  where vwProducts.category_id = categ.category_id;
  
  

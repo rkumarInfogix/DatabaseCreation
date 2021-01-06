@@ -594,19 +594,17 @@ create View `TestView With Space`(
     columnvarbinary,
     columndate,
     columndatetime,
-    columndatetime2,
     columnsamlldatetime) as 
     select 
-    columnchar,
-    `Column Varchar`,
-    columntext,
-    columnntext,
-    columnbinary,
-    columnvarbinary,
-    columndate,
-    columndatetime,
-    columndatetime2,
-    columnsamlldatetime  from `TestTable With Space`;
+    a.columnchar,
+    a.`Column Varchar`,
+    a.columntext,
+    a.columnntext,
+    a.columnbinary,
+    a.columnvarbinary,
+    a.columndate,
+    a.columndatetime,
+    a.columnsamlldatetime  from `TestTable With Space` a;
 	
 	
 	
@@ -638,53 +636,53 @@ create View TestView(
     ColumnTime ,
     ColumnDatetimeoffset) as 
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestTable_All_Data_Types;
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestTable_All_Data_Types a;
 
 	
 	    
         CREATE VIEW TestView_Emp_Dept as SELECT
-            empno,
-            ename,
-        job,`department name` 
+            emp.empno,
+            emp.ename,
+        emp.job,dept.`department name` 
         from TestTableDept dept , 
         TestTableEmployee emp 
-        where emp.`department id`= dept.deptno AND `department name`!='Services' and ename != ' sam ';
+        where emp.`department id`= dept.deptno AND dept.`department name`!='Services' and emp.ename != ' sam ';
 		
 		
 		
 create view TestViewProductBrand as 
-select product_id, product_name, brand_name,model_year , list_price , category_id from TestTableProducts products , TestCatalogOther.TestTableBrands brands
+select products.product_id, products.product_name, brands.brand_name,products.model_year , products.list_price , products.category_id from TestTableProducts products , TestCatalogOther.TestTableBrands brands
  where products.brand_id = brands.brand_id;
  
  
  
 create view TestViewProductCategory as 
-select product_id, product_name, brand_name,model_year , list_price , category_name from TestViewProductBrand vwProducts , TestCatalogOther.TestTableCategories categ 
+select vwProducts.product_id, vwProducts.product_name, vwProducts.brand_name,vwProducts.model_year , vwProducts.list_price , categ.category_name from TestViewProductBrand vwProducts , TestCatalogOther.TestTableCategories categ 
  where vwProducts.category_id = categ.category_id;
  
  
@@ -712,255 +710,255 @@ DELIMITER $$
 
 CREATE PROCEDURE TestProcSumTableColumn ( p_input1 double)
  begin
- SELECT ColumnFloat  FROM TestTable_All_Data_Types  WHERE  ColumnFloat = p_input1;
+ SELECT a.ColumnFloat  FROM TestTable_All_Data_Types a  WHERE  a.ColumnFloat = p_input1;
  end$$
 
 
   CREATE PROCEDURE TestProcSumTable_Column_Arguments ( p_input1 double , p_input2 int , p_input3 Varchar(1))
  begin
- SELECT ColumnFloat  FROM TestTable_All_Data_Types 
- WHERE  ColumnFloat = p_input1 and ColumnNumeric = p_input2 and ColumnVarchar = p_input3;
+ SELECT a.ColumnFloat  FROM TestTable_All_Data_Types  a
+ WHERE  a.ColumnFloat = p_input1 and a.ColumnNumeric = p_input2 and a.ColumnVarchar = p_input3;
  end$$
 
 
 
  CREATE PROCEDURE TestProcSumTableColumnWithMultiArguments ( p_input1 double , p_input2 int)
  begin
- SELECT ColumnFloat  FROM TestTable_All_Data_Types  WHERE  ColumnFloat = p_input1 and ColumnNumeric = p_input2;
+ SELECT a.ColumnFloat  FROM TestTable_All_Data_Types a WHERE  a.ColumnFloat = p_input1 and a.ColumnNumeric = p_input2;
  end$$
 
 
 CREATE PROCEDURE TestProcWithMoreThan4000Char() 
 BEGIN
 select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestTable_All_Data_Types
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestTable_All_Data_Types a
        
     union all
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestView
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestView a
     
     union all
     
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestTable_All_Data_Types
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestTable_All_Data_Types a
        
     union all
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestView
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestView a
     union all
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestTable_All_Data_Types
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestTable_All_Data_Types a
        
     union all
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestView
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestView a
     union all
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestTable_All_Data_Types
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestTable_All_Data_Types a
        
     union all
     select 
-    `Column Char With Space` ,
-    ColumnVarchar ,
-    ColumnText ,
-    ColumnNvarchar ,
-    ColumnNtext ,
-    ColumnBinary ,
-    ColumnVarbinary ,
-    ColumnIamge ,
-    ColumnBit ,
-    ColumnTinyInt ,
-    ColumnSamllint ,
-    ColumnInt ,
-    ColumnBigint ,
-    ColumnDecimal ,
-    ColumnDec ,
-    ColumnNumeric ,
-    ColumnFloat ,
-    ColumnReal ,
-    ColumnSmallmoney ,
-    ColumnMoney ,
-    ColumnDate ,
-    ColumnDateTime ,
-    ColumnDateTime2 ,
-    ColumnSamlldatetime ,
-    ColumnTime ,
-    ColumnDatetimeoffset  from TestView;
+    a.`Column Char With Space` ,
+    a.ColumnVarchar ,
+    a.ColumnText ,
+    a.ColumnNvarchar ,
+    a.ColumnNtext ,
+    a.ColumnBinary ,
+    a.ColumnVarbinary ,
+    a.ColumnIamge ,
+    a.ColumnBit ,
+    a.ColumnTinyInt ,
+    a.ColumnSamllint ,
+    a.ColumnInt ,
+    a.ColumnBigint ,
+    a.ColumnDecimal ,
+    a.ColumnDec ,
+    a.ColumnNumeric ,
+    a.ColumnFloat ,
+    a.ColumnReal ,
+    a.ColumnSmallmoney ,
+    a.ColumnMoney ,
+    a.ColumnDate ,
+    a.ColumnDateTime ,
+    a.ColumnDateTime2 ,
+    a.ColumnSamlldatetime ,
+    a.ColumnTime ,
+    a.ColumnDatetimeoffset  from TestView a;
     
 
 END$$
@@ -969,8 +967,8 @@ END$$
 CREATE PROCEDURE TestProcProductBrand ( p_product_id int)
  begin
 SELECT
-    product_id,
-    product_name
+    vwproducts.product_id,
+    vwproducts.product_name
 FROM
     testviewproductbrand                 vwproducts,
     TestCatalogOther.testtablebrands   categ
@@ -980,15 +978,15 @@ WHERE
     (categ.brand_name != ' HERO '
      OR categ.brand_name != 'HARLEY'
      )
-     AND product_id = p_product_id;
+     AND vwproducts.product_id = p_product_id;
  end$$
 
 
 CREATE PROCEDURE TestProcProductCategory ( p_product_id int)
  begin
 SELECT
-    product_id,
-    product_name,
+    vwproducts.product_id,
+    vwproducts.product_name,
     vwproducts.category_name
 FROM
     testviewproductcategory                  vwproducts,
@@ -1000,7 +998,7 @@ WHERE
      OR vwproducts.category_name != 'Cruisers Bicycles'
      )
      
-    AND product_id = p_product_id;
+    AND vwproducts.product_id = p_product_id;
  end$$
 
 
@@ -1027,7 +1025,7 @@ RETURNS VARCHAR(20)
   DETERMINISTIC
 BEGIN  
 	declare result VARCHAR(30);
- SELECT ColumnChar into result FROM `TestTable With Space` ;
+ SELECT a.ColumnChar into result FROM `TestTable With Space` a ;
 
 RETURN  result;
    
@@ -1042,11 +1040,11 @@ BEGIN
 	declare result VARCHAR(30);
 SELECT
                
-        concat(`department name`,`department Location`,TestFunCurrentDate()) DepartmentLocation into result
+        concat(dept.`department name`,dept.`department Location`,TestFunCurrentDate()) DepartmentLocation into result
         from TestTableDept dept , 
         TestTableEmployee emp 
-        where emp.`department id`= dept.deptno AND `department name`!='Services' and ename != ' sam '
-     AND empno = p_empno;
+        where emp.`department id`= dept.deptno AND dept.`department name`!='Services' and emp.ename != ' sam '
+     AND emp.empno = p_empno;
 RETURN  result;
    
   end$$
@@ -1060,7 +1058,7 @@ BEGIN
 	
 	declare result int;
     SELECT
-    product_id into result
+    vwproducts.product_id into result
 FROM
     testviewproductbrand                 vwproducts,
     TestCatalogOther.testtablebrands   categ
@@ -1070,7 +1068,7 @@ WHERE
     (categ.brand_name != ' HERO '
      OR categ.brand_name != 'HARLEY'
      )
-     AND product_id = p_product_id;
+     AND vwproducts.product_id = p_product_id;
 RETURN  result;
 END$$
 
@@ -1080,7 +1078,7 @@ RETURNS int
 -- Returns the stock level for the product.  
 BEGIN  
         
-    RETURN ( SELECT SUM(columnint)   
+    RETURN ( SELECT SUM(p.columnint)   
     FROM TestTable_All_Data_Types p   
     WHERE p.ColumnFloat = p_input1 );  
 END$$
@@ -1095,13 +1093,13 @@ END$$
 CREATE TRIGGER TestTrig_All_Data_Types before UPDATE ON TestTable_All_Data_Types
 FOR EACH ROW 
   INSERT INTO TestTrigAllDataTypes(ColumnText)
-  SELECT ColumnText
-  FROM TestTable_All_Data_Types;$$
+  SELECT a.ColumnText
+  FROM TestTable_All_Data_Types a;$$
  
  
 CREATE TRIGGER `TestTrigAllDataTypes With Space` before UPDATE ON `TestTable With Space`
 FOR EACH ROW 
   INSERT INTO `TestTable With Space`(ColumnText)
-  SELECT ColumnText FROM `TestTable With Space`;
+  SELECT a.ColumnText FROM `TestTable With Space` a;
 
 DELIMITER ;

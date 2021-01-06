@@ -322,10 +322,10 @@ create OR REPLACE View TestSchema."TestView With Space"(
 	columntimestamp
 	) as 
     select 
-    columnchar,
-	"column varchar",
-	columndate,
-	columntimestamp  from TestSchema."TestTable With Space";
+    a.columnchar,
+	a."column varchar",
+	a.columndate,
+	a.columntimestamp  from TestSchema."TestTable With Space" a;
 	
 	
 	
@@ -344,39 +344,39 @@ create  OR REPLACE View TestSchema.TestView(
 	columntimestamp
 	) as 
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestTable_All_Data_Types;
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestTable_All_Data_Types a;
 
 	
 	    
         CREATE OR REPLACE VIEW TestSchema.TestView_Emp_Dept as SELECT
-            empno,
-            ename,
-        job,"Department Name" 
+            emp.empno,
+            emp.ename,
+        emp.job,dept."Department Name" 
         from TestSchema.TestTableDept dept , 
         TestSchema.TestTableEmployee emp 
-        where emp."department id"= dept.deptno AND "Department Name"!='Services' and ename != ' sam ';
+        where emp."department id"= dept.deptno AND dept."Department Name"!='Services' and emp.ename != ' sam ';
 		
 		
 		
 create OR REPLACE view TestSchema.TestViewProductBrand as 
-select product_id, product_name, brand_name,model_year , list_price , category_id from TestSchema.TestTableProducts products , TestSchemaOther.TestTableBrands brands
+select products.product_id, products.product_name, brands.brand_name,products.model_year , products.list_price , products.category_id from TestSchema.TestTableProducts products , TestSchemaOther.TestTableBrands brands
  where products.brand_id = brands.brand_id;
  
  
  
 create OR REPLACE view TestSchema.TestViewProductCategory as 
-select product_id, product_name, brand_name,model_year , list_price , category_name from TestSchema.TestViewProductBrand vwProducts , TestSchemaOther.TestTableCategories categ 
+select vwProducts.product_id, vwProducts.product_name, vwProducts.brand_name,vwProducts.model_year , vwProducts.list_price , categ.category_name from TestSchema.TestViewProductBrand vwProducts , TestSchemaOther.TestTableCategories categ 
  where vwProducts.category_id = categ.category_id;
  
  
@@ -398,7 +398,7 @@ CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTableColumn(input1 float)
  AS
  $$
  begin
- SELECT ColumnFloat  FROM TestSchema.TestTable_All_Data_Types  WHERE  ColumnFloat = input1;
+ SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = input1;
  end;
 $$ LANGUAGE plpgsql;
  
@@ -406,7 +406,7 @@ $$ LANGUAGE plpgsql;
  AS
  $$
  begin
- SELECT ColumnFloat  FROM TestSchema.TestTable_All_Data_Types  WHERE  ColumnFloat = input1 and ColumnNumeric = input2 and ColumnNumeric = input3;
+ SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = input1 and p.ColumnNumeric = input2 and p.ColumnNumeric = input3;
  
  UPDATE
    TestTable_All_Data_Types
@@ -432,7 +432,7 @@ $$ LANGUAGE plpgsql;
  AS
  $$
  begin
- SELECT ColumnFloat  FROM TestSchema.TestTable_All_Data_Types  WHERE  ColumnFloat = input1 and ColumnNumeric = input2;
+ SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = input1 and p.ColumnNumeric = input2;
  end;
 $$ LANGUAGE plpgsql;
  
@@ -442,122 +442,122 @@ AS
 $$
 BEGIN
 select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestView
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestView a
     
     union all
     
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestView
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestView a
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestView
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestView a
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-	columnsamllint,
-	columnint,
-	columnbigint,
-	columndecimal,
-	columndec,
-	columnnumeric,
-	columnfloat,
-	columnreal,
-	columndate,
-	columntimestamp  from TestSchema.TestView;
+    a."Column Char With Space",
+    a.columnvarchar,
+	a.columnsamllint,
+	a.columnint,
+	a.columnbigint,
+	a.columndecimal,
+	a.columndec,
+	a.columnnumeric,
+	a.columnfloat,
+	a.columnreal,
+	a.columndate,
+	a.columntimestamp  from TestSchema.TestView a;
     
 END;
 $$ LANGUAGE plpgsql;
@@ -567,8 +567,8 @@ CREATE OR REPLACE PROCEDURE TestSchema.TestProcProductBrand(product_id int)
  $$
  begin
 SELECT
-    product_id,
-    product_name
+    vwproducts.product_id,
+    vwproducts.product_name
 FROM
     TestSchema.testviewproductbrand                 vwproducts,
     TestSchemaOther.testtablebrands   categ
@@ -578,7 +578,7 @@ WHERE
     (categ.brand_name != ' HERO '
      OR categ.brand_name != 'HARLEY'
      )
-     AND product_id = @product_id;
+     AND vwproducts.product_id = @product_id;
  end;
 $$ LANGUAGE plpgsql;
  
@@ -588,8 +588,8 @@ CREATE OR REPLACE PROCEDURE TestSchema.TestProcProductCategory(productid int)
  $$
  begin
 SELECT
-    product_id,
-    product_name,
+    vwproducts.product_id,
+    vwproducts.product_name,
     vwproducts.category_name
 FROM
     TestSchema.testviewproductcategory                  vwproducts,
@@ -601,7 +601,7 @@ WHERE
      OR vwproducts.category_name != 'Cruisers Bicycles'
      )
      
-    AND product_id = productid;
+    AND vwproducts.product_id = productid;
  end;
  $$ LANGUAGE plpgsql;
  

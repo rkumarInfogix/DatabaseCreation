@@ -542,14 +542,14 @@ create View TestSchema."TestView With Space"(
     ColumnDateTime,
     ColumnSamlldatetime) as 
     select 
-    ColumnChar,
-    "Column Varchar",
-    ColumnText,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime  from TestSchema.[TestTable With Space];
+    a.ColumnChar,
+    a."Column Varchar",
+    a.ColumnText,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime  from TestSchema.[TestTable With Space] a;
 	
 	
 	
@@ -578,50 +578,50 @@ create View TestSchema.TestView(
     ColumnSamlldatetime,
     ColumnTime) as 
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestTable_All_Data_Types;
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestTable_All_Data_Types a;
 
 	
 	    
         CREATE VIEW TestSchema.TestView_Emp_Dept as SELECT
-            empno,
-            ename,
-        job,[Department Name] 
+            emp.empno,
+            emp.ename,
+        emp.job,dept.[Department Name] 
         from TestSchema.TestTableDept dept , 
         TestSchema.TestTableEmployee emp 
-        where emp.[department id]= dept.deptno AND [Department Name]!='Services' and ename != ' sam ';
+        where emp.[department id]= dept.deptno AND dept.[Department Name]!='Services' and emp.ename != ' sam ';
 		
 		
 		
 create view TestSchema.TestViewProductBrand as 
-select product_id, product_name, brand_name,model_year , list_price , category_id from TestSchema.TestTableProducts products , TestSchemaOther.TestTableBrands brands
+select products.product_id, products.product_name, brands.brand_name,products.model_year , products.list_price , products.category_id from TestSchema.TestTableProducts products , TestSchemaOther.TestTableBrands brands
  where products.brand_id = brands.brand_id;
  
  
  
 create view TestSchema.TestViewProductCategory as 
-select product_id, product_name, brand_name,model_year , list_price , category_name from TestSchema.TestViewProductBrand vwProducts , TestSchemaOther.TestTableCategories categ 
+select vwProducts.product_id, vwProducts.product_name, vwProducts.brand_name,vwProducts.model_year , vwProducts.list_price , categ.category_name from TestSchema.TestViewProductBrand vwProducts , TestSchemaOther.TestTableCategories categ 
  where vwProducts.category_id = categ.category_id;
  
  
@@ -636,7 +636,7 @@ create View TestSchema.TestViewStar(
     ColumnDateTime,
     ColumnSamlldatetime) as 
     select 
-    *  from TestSchema."TestTable With Space";
+    *  from TestSchema."TestTable With Space" ;
 	
 	
 
@@ -647,13 +647,13 @@ create View TestSchema.TestViewStar(
 CREATE or replace PROCEDURE  TestSchema.TestProcSumTableColumn @input1 float
  AS
  begin
- SELECT ColumnFloat  FROM TestSchema.TestTable_All_Data_Types  WHERE  ColumnFloat = @input1
+ SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = @input1
  end;
  
   CREATE or replace PROCEDURE TestSchema.TestProcSumTable_Column_Arguments @input1 float , @input2 int , @input3 varchar 
  AS
  begin
- SELECT ColumnFloat  FROM TestSchema.TestTable_All_Data_Types  WHERE  ColumnFloat = @input1 and ColumnNumeric = @input2 and ColumnNumeric = @input3
+ SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = @input1 and p.ColumnNumeric = @input2 and p.ColumnNumeric = @input3
  
  UPDATE TestSchema.TestTable_All_Data_Types
 SET    ColumnVarchar = 'PASS'
@@ -676,217 +676,217 @@ WHERE    deptno = '1'
  CREATE or replace PROCEDURE TestSchema.TestProcSumTableColumnWithMultiArguments @input1 float , @input2 int
  AS
  begin
- SELECT ColumnFloat  FROM TestSchema.TestTable_All_Data_Types  WHERE  ColumnFloat = @input1 and ColumnNumeric = @input2
+ SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = @input1 and p.ColumnNumeric = @input2
  end;
  
  
 CREATE or replace PROCEDURE TestSchema.TestProcWithMoreThan4000Char 
 AS
 select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestView
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestView a
     
     union all
     
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestView
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestView a
     union all
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestView
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestView a
     union all
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    ColumnVarchar,
-    ColumnText,
-    ColumnNvarchar,
-    ColumnBinary,
-    ColumnVarbinary,
-    ColumnIamge,
-    ColumnBit,
-    ColumnTinyInt,
-    ColumnSamllint,
-    ColumnInt,
-    ColumnBigint,
-    ColumnDecimal,
-    ColumnDec,
-    ColumnNumeric,
-    ColumnFloat,
-    ColumnReal,
-    ColumnSmallmoney,
-    ColumnMoney,
-    ColumnDate,
-    ColumnDateTime,
-    ColumnSamlldatetime,
-    ColumnTime  from TestSchema.TestView
+    a."Column Char With Space",
+    a.ColumnVarchar,
+    a.ColumnText,
+    a.ColumnNvarchar,
+    a.ColumnBinary,
+    a.ColumnVarbinary,
+    a.ColumnIamge,
+    a.ColumnBit,
+    a.ColumnTinyInt,
+    a.ColumnSamllint,
+    a.ColumnInt,
+    a.ColumnBigint,
+    a.ColumnDecimal,
+    a.ColumnDec,
+    a.ColumnNumeric,
+    a.ColumnFloat,
+    a.ColumnReal,
+    a.ColumnSmallmoney,
+    a.ColumnMoney,
+    a.ColumnDate,
+    a.ColumnDateTime,
+    a.ColumnSamlldatetime,
+    a.ColumnTime  from TestSchema.TestView a
     
 GO;
 
@@ -895,8 +895,8 @@ CREATE or replace PROCEDURE TestSchema.TestProcProductBrand @product_id int
  AS
  begin
 SELECT
-    product_id,
-    product_name
+    vwproducts.product_id,
+    vwproducts.product_name
 FROM
     TestSchema.TestViewProductBrand                 vwproducts,
     TestSchemaOther.TestTableBrands   categ
@@ -906,7 +906,7 @@ WHERE
     (categ.brand_name != ' HERO '
      OR categ.brand_name != 'HARLEY'
      )
-     AND product_id = @product_id
+     AND vwproducts.product_id = @product_id
  end;
  
   
@@ -914,8 +914,8 @@ CREATE or replace PROCEDURE TestSchema.TestProcProductCategory @product_id int
  AS
  begin
 SELECT
-    product_id,
-    product_name,
+    vwproducts.product_id,
+    vwproducts.product_name,
     vwproducts.category_name
 FROM
     TestSchema.TestViewProductCategory                  vwproducts,
@@ -927,7 +927,7 @@ WHERE
      OR vwproducts.category_name != 'Cruisers Bicycles'
      )
      
-    AND product_id = @product_id
+    AND vwproducts.product_id = @product_id
  end;
 
 --*************** CREATE FUNCTION*****************************
@@ -951,7 +951,7 @@ RETURNS VARCHAR(20)
  as
 BEGIN  
 	declare @result VARCHAR(30)
- SELECT @result = ColumnChar  FROM TestSchema."TestTable With Space" 
+ SELECT @result = p.ColumnChar  FROM TestSchema."TestTable With Space" p
 
 RETURN  @result
    
@@ -964,11 +964,11 @@ RETURNS VARCHAR(20)
 AS
 BEGIN 
 	declare @result VARCHAR(30)
-SELECT  @result = UPPER("Department Name"+"Department Location"+TestSchema.TestFunCurrentDate())  
+SELECT  @result = UPPER(dept."Department Name"+dept."Department Location"+TestSchema.TestFunCurrentDate())  
         from TestSchema.TestTableDept dept , 
         TestSchema.TestTableEmployee emp 
-        where emp."department id"= dept.deptno AND "Department Name"!='Services' and ename != ' sam '
-     AND empno = @p_empno
+        where emp."department id"= dept.deptno AND dept."Department Name"!='Services' and emp.ename != ' sam '
+     AND emp.empno = @p_empno
 RETURN  @result
    
   end;
@@ -981,7 +981,7 @@ AS
 BEGIN  
 	
 	declare @result int
-    SELECT  @result = product_id 
+    SELECT  @result = vwproducts.product_id 
 FROM
     TestSchema.TestViewProductBrand                 vwproducts,
     TestSchemaOther.TestTableBrands   categ
@@ -991,7 +991,7 @@ WHERE
     (categ.brand_name != ' HERO '
      OR categ.brand_name != 'HARLEY'
      )
-     AND product_id = @p_product_id
+     AND vwproducts.product_id = @p_product_id
 RETURN  @result
 END;
 
@@ -1001,7 +1001,7 @@ RETURNS int
 AS  
 BEGIN  
         
-    RETURN ( SELECT SUM(ColumnInt)   
+    RETURN ( SELECT SUM(p.ColumnInt)   
     FROM TestSchema.TestTable_All_Data_Types p   
     WHERE p.ColumnFloat = @p_input1 )
 END;
@@ -1013,8 +1013,8 @@ for update as
 if update (ColumnText) and @@rowcount = 1
 begin 
    INSERT INTO TestSchema.TestTable_All_Data_Types(ColumnText)
-  SELECT ColumnText
-  FROM TestSchema.TestTable_All_Data_Types
+  SELECT p.ColumnText
+  FROM TestSchema.TestTable_All_Data_Types p
 end;
 
 create or replace trigger TestSchema.[TestTrigAllDataTypes With Space] 
@@ -1023,6 +1023,6 @@ for update as
 if update (ColumnText) and @@rowcount = 1
 begin 
    INSERT INTO TestSchema."TestTable With Space"(ColumnText)
-  SELECT ColumnText FROM TestSchema."TestTable With Space"
+  SELECT p.ColumnText FROM TestSchema."TestTable With Space" p
 end;
 

@@ -391,11 +391,11 @@ replace View harvestertestuser."TestView With Space"(
     columndate,
     columndatetime) as 
     select 
-    columnchar,
-    "Column Varchar",
-    columntext,
-    columndate,
-    columndatetime  from harvestertestuser."TestTable With Space";
+    a.columnchar,
+    a."Column Varchar",
+    a.columntext,
+    a.columndate,
+    a.columndatetime  from harvestertestuser."TestTable With Space" a;
 	
 	
 	
@@ -414,40 +414,40 @@ replace View harvestertestuser.TestView(
     columndatetime,
     ColumnTime) as 
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestTable_All_Data_Types;
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestTable_All_Data_Types a;
 
 	
 	    
         replace VIEW harvestertestuser.TestView_Emp_Dept as SELECT
-            empno,
-            ename,
-        job,"Department Name"  
+            emp.empno,
+            emp.ename,
+        emp.job,dept."Department Name"  
         from harvestertestuser.TestTableDept dept , 
         harvestertestuser.TestTableEmployee emp 
-        where emp."department id" = dept.deptno AND "Department Name" <>'Services' and ename <>' sam ';
+        where emp."department id" = dept.deptno AND dept."Department Name" <>'Services' and emp.ename <>' sam ';
 		
 		
 		
 replace view harvestertestuser.TestViewProductBrand as 
-select product_id, product_name, brand_name,model_year , list_price , category_id from harvestertestuser.TestTableProducts products , harvestertestuserother.TestTableBrands brands
+select products.product_id, products.product_name, brands.brand_name,products.model_year , products.list_price , products.category_id from harvestertestuser.TestTableProducts products , harvestertestuserother.TestTableBrands brands
  where products.brand_id = brands.brand_id;
  
  
  
 replace view harvestertestuser.TestViewProductCategory as 
-select product_id, product_name, brand_name,model_year , list_price , category_name from harvestertestuser.TestViewProductBrand vwProducts , harvestertestuserother.TestTableCategories categ 
+select vwProducts.product_id, vwProducts.product_name, vwProducts.brand_name,vwProducts.model_year , vwProducts.list_price , categ.category_name from harvestertestuser.TestViewProductBrand vwProducts , harvestertestuserother.TestTableCategories categ 
  where vwProducts.category_id = categ.category_id;
  
  
@@ -472,20 +472,20 @@ REPLACE  PROCEDURE harvestertestuser.TestProcSumTableColumn ( in p_input1  INT)
 
  BEGIN
  DECLARE resultFloat INT;
-  SELECT ColumnFloat into resultFloat  FROM harvestertestuser.TestTable_All_Data_Types WHERE ColumnFloat = :p_input1  ;
+  SELECT p.ColumnFloat into resultFloat  FROM harvestertestuser.TestTable_All_Data_Types p WHERE p.ColumnFloat = :p_input1  ;
  END;
 
 REPLACE PROCEDURE harvestertestuser.TestProcSumTable_Column_Arguments( in p_input1  INT , in p_input2  INT , in p_input3  Varchar)
  begin
  DECLARE resultFloat INT;
- SELECT sum(ColumnFloat) into resultFloat  FROM harvestertestuser.TestTable_All_Data_Types 
- WHERE  ColumnFloat = :p_input1 and ColumnFloat = :p_input2 and ColumnVarchar = :p_input3;
+ SELECT sum(p.ColumnFloat) into resultFloat  FROM harvestertestuser.TestTable_All_Data_Types p
+ WHERE  p.ColumnFloat = :p_input1 and p.ColumnFloat = :p_input2 and p.ColumnVarchar = :p_input3;
  END;
 
 REPLACE PROCEDURE harvestertestuser.TestProcSumTableColumnWithMultiArguments ( in p_input1  INT , in p_input2  INT)
  begin
   DECLARE resultFloat INT;
-  SELECT ColumnFloat into resultFloat  FROM harvestertestuser.TestTable_All_Data_Types WHERE ColumnFloat = :p_input1  ;
+  SELECT p.ColumnFloat into resultFloat  FROM harvestertestuser.TestTable_All_Data_Types p WHERE p.ColumnFloat = :p_input1  ;
 
   update TestTable_All_Data_Types set ColumnVarchar = 'PASS' WHERE ColumnFloat = :p_input1 and ColumnInt = :p_input2;
  insert into TestTableDept values (1,'ACCOUNTING' || :p_input1,'ST LOUIS' || :p_input2);
@@ -498,130 +498,130 @@ DYNAMIC RESULT SETS 1
 begin
 DECLARE cur1 CURSOR WITH RETURN ONLY FOR
  select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestView
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestView a
     
     union all
     
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestView
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestView a
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestTable_All_Data_Types
+   a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestView
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestView a
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestTable_All_Data_Types
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestTable_All_Data_Types a
        
     union all
     select 
-    "Column Char With Space",
-    columnvarchar,
-    columntext,
-    columniamge,
-    ColumnByteInt,
-    columnsamllint,
-    columnint,
-    columnbigint,
-    columndecimal,
-    columnfloat,
-    columndate,
-    columndatetime,
-    ColumnTime  from harvestertestuser.TestView;
+    a."Column Char With Space",
+    a.columnvarchar,
+    a.columntext,
+    a.columniamge,
+    a.ColumnByteInt,
+    a.columnsamllint,
+    a.columnint,
+    a.columnbigint,
+    a.columndecimal,
+    a.columnfloat,
+    a.columndate,
+    a.columndatetime,
+    a.ColumnTime  from harvestertestuser.TestView a;
  END;
 
 
@@ -631,8 +631,8 @@ REPLACE PROCEDURE harvestertestuser.TestProcProductBrand( IN product_id INT)
 BEGIN
 DECLARE cur1 CURSOR WITH RETURN ONLY FOR
  SELECT
-    product_id,
-    product_name
+    vwproducts.product_id,
+    vwproducts.product_name
 FROM
     harvestertestuser.testviewproductbrand  vwproducts,
     harvestertestuserother.testtablebrands   categ
@@ -642,7 +642,7 @@ WHERE
     (categ.brand_name <> ' HERO '
      OR categ.brand_name <> 'HARLEY'
      )
-     AND product_id = :product_id;
+     AND vwproducts.product_id = :product_id;
  END;
 
 
@@ -652,8 +652,8 @@ REPLACE PROCEDURE harvestertestuser.TestProcProductCategory ( IN productid INT)
 BEGIN
 DECLARE cur1 CURSOR WITH RETURN ONLY FOR
  SELECT
-    product_id,
-    product_name,
+    vwproducts.product_id,
+    vwproducts.product_name,
     vwproducts.category_name
 FROM
     harvestertestuser.testviewproductcategory   vwproducts,
@@ -664,7 +664,7 @@ WHERE
     (vwproducts.category_name <> ' Mountain Bikes '
      OR vwproducts.category_name <> 'Cruisers Bicycles'
      )
-    AND product_id = :productid;
+    AND vwproducts.product_id = :productid;
  END;
 
 
@@ -725,8 +725,8 @@ FOR EACH ROW
 WHEN ((NewRow.ColumnFloat-OldRow.ColumnFloat)/OldRow.ColumnFloat >.10)
 
   INSERT INTO harvestertestuser.TestTable_All_Data_Types(ColumnFloat)
-  SELECT ColumnFloat
-  FROM harvestertestuser.TestTable_All_Data_Types;
+  SELECT p.ColumnFloat
+  FROM harvestertestuser.TestTable_All_Data_Types p;
  
  
  REPLACE TRIGGER harvestertestuser."TestTrigAllDataTypes With Space" AFTER INSERT ON harvestertestuser."TestTable With Space"
@@ -734,4 +734,4 @@ REFERENCING NEW AS curr_value
 FOR EACH ROW
 
   INSERT INTO harvestertestuser."TestTable With Space"(ColumnText)
-  SELECT curr_value.ColumnText FROM harvestertestuser."TestTable With Space";
+  SELECT curr_value.ColumnText FROM harvestertestuser."TestTable With Space" ;

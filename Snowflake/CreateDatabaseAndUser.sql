@@ -9,6 +9,8 @@ GRANT OWNERSHIP ON ALL FUNCTIONS IN DATABASE TestCatalog TO ROLE metadata_access
 GRANT SELECT ON ALL tables IN DATABASE TestCatalog TO ROLE metadata_access_role;
 grant usage on warehouse COMPUTE_WH to role metadata_access_role;
 grant usage, monitor on database TestCatalog to role metadata_access_role;
+GRANT USAGE ON SCHEMA TestCatalog.TESTSCHEMA TO ROLE metadata_access_role;
+GRANT USAGE ON SCHEMA TestCatalog.TESTSCHEMAOTHER TO ROLE metadata_access_role;
 
 
 
