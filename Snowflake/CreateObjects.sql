@@ -583,59 +583,66 @@ create View TestSchema.TestViewStar(
 --***************CREATE PROCEDURE*****************************
 
 
-CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTableColumn(input1 float)
+CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTableColumn(INPUT1 float)
  returns float not null
     language javascript
-    as
-    '
-    delare columnFloatResult float;
- SELECT p.ColumnFloat INTO columnFloatResult  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = input1;
-RETURN columnFloatResult;
- '	;
- 
-  CREATE OR REPLACE  PROCEDURE TestSchema.TestProcSumTable_Column_Arguments(input1 float , input2 double , input3 varchar) 
- returns BOOLEAN 
-    language javascript
-    as
-    '
- SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = input1 and p.ColumnNumeric = input2 and p.ColumnNumeric = input3;
- 
- UPDATE
-   TestTable_All_Data_Types
-SET    Columnvarchar = ''PASS''
-WHERE    ColumnFloat = input1
-   AND ColumnNumeric = input2;
-
-
-INSERT
-   INTO    TestTableDept
-VALUES (1,''ACCOUNTING_TEST'' ,''ST LOUIS_TEST'');
-
-
-DELETE
-FROM    TestTableDept
-WHERE    deptno = ''1'';
-
-RETURN TRUE;
- '	;
- 
- CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTableColumnWithMultiArguments (input1 float , input2 double)
- returns float not null
-    language javascript
-    as
-    '
-    delare columnFloatResult float;
- SELECT p.ColumnFloat INTO columnFloatResult  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = input1 and p.ColumnNumeric = input2;
- RETURN columnFloatResult;
-  '	;
- 
-CREATE OR REPLACE PROCEDURE TestSchema.TestProcWithMoreThan4000Char() 
- returns BOOLEAN 
-    language javascript
-    AS 
-    ' 
+    AS
+    $$
+sql_command  = " SELECT p.ColumnFloat   FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat = "+INPUT1;
+  var rs = snowflake.execute( { sqlText: sql_command  } );
+	rs.next()
     
-select 
+    price = rs.getColumnValue(1);
+  return price;
+  $$;
+ 
+  CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTable_Column_Arguments(INPUT1 float , INPUT2 double , INPUT3 varchar)
+ returns float not null
+    language javascript
+    AS
+    $$
+sql_command  =  "SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat ="+ INPUT1 +" and p.ColumnNumeric = "+ INPUT2 +" and p.ColumnNumeric = "+ INPUT3;
+
+  var rs = snowflake.execute( { sqlText: sql_command  } );
+	rs.next()
+    
+    price = rs.getColumnValue(1);
+
+sql_command  =  "UPDATE   TestTable_All_Data_Types SET    Columnvarchar = 'PASS' WHERE    ColumnFloat ="+ INPUT1   +"  AND ColumnNumeric = " +INPUT2;
+
+   rs = snowflake.execute( { sqlText: sql_command  } );
+
+sql_command  =  "INSERT    INTO    TestTableDept VALUES (1,'ACCOUNTING_TEST' ,'ST LOUIS_TEST')";
+rs = snowflake.execute( { sqlText: sql_command  } );
+
+sql_command  =  "DELETE FROM    TestTableDept WHERE    deptno = '1'";
+rs = snowflake.execute( { sqlText: sql_command  } );
+
+  return price;
+  $$;
+ 
+ CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTableColumnWithMultiArguments(INPUT1 float , INPUT2 double )
+ returns float not null
+    language javascript
+    AS
+    $$
+sql_command  =  "SELECT p.ColumnFloat  FROM TestSchema.TestTable_All_Data_Types p  WHERE  p.ColumnFloat ="+ INPUT1 +" and p.ColumnNumeric = "+ INPUT2 ;
+
+  var rs = snowflake.execute( { sqlText: sql_command  } );
+	rs.next()
+    
+    price = rs.getColumnValue(1);
+
+
+  return price;
+  $$;
+ 
+CREATE OR REPLACE PROCEDURE TestSchema.TestProcWithMoreThan4000Char()
+ returns BOOLEAN 
+    language javascript
+    AS
+    $$
+sql_command  =  `select 
     a."Column Char With Space",
     a.ColumnVarchar,
     a.ColumnText ,
@@ -807,59 +814,63 @@ select
     a.ColumnDate ,
     a.ColumnDateTime ,
     a.ColumnTime ,
-    a.ColumnTimestamp  from TestSchema.TestView a;
-	
-	
-  return TRUE;
-  ';
+    a.ColumnTimestamp  from TestSchema.TestView a`;
 
+  var rs = snowflake.execute( { sqlText: sql_command  } );
+	
+  return true;
+  $$;
+    
 
-CREATE OR REPLACE PROCEDURE TestSchema.TestProcProductBrand(product_id double)
+CREATE OR REPLACE PROCEDURE TestSchema.TestProcSumTableColumn(PRODUCT_ID float)
  returns double not null
- language javascript
- AS
- '
- delare columnDoubleResult double;
-
-   SELECT
-    vwproducts.product_id INTO columnDoubleResult
+    language javascript
+    AS
+    $$
+sql_command  = `SELECT
+    vwproducts.product_id 
 FROM
     TestSchema.testviewproductbrand                 vwproducts,
     TestSchemaOther.testtablebrands   categ
 WHERE
     vwproducts.brand_name = categ.brand_name
     AND 
-    (categ.brand_name != '' HERO ''
-     OR categ.brand_name != ''HARLEY''
+    (categ.brand_name != ' HERO '
+     OR categ.brand_name != 'HARLEY'
      )
-     AND vwproducts.product_id = product_id;
-    RETURN columnDoubleResult;
- ';
+     AND vwproducts.product_id =`+ PRODUCT_ID;
+
+  var rs = snowflake.execute( { sqlText: sql_command  } );
+  rs.next()
+  price = rs.getColumnValue(1);
+  return price;
+  $$;
  
   
-CREATE OR REPLACE PROCEDURE TestSchema.TestProcProductCategory (product_id double)
+CREATE OR REPLACE PROCEDURE TestSchema.TestProcProductCategory(PRODUCT_ID float)
  returns double not null
- language javascript
- AS
- '
- 
- delare columnDoubleResult double;
-
-SELECT
-    vwproducts.product_id INTO columnDoubleResult
+    language javascript
+    AS
+    $$
+sql_command  = `SELECT
+    vwproducts.product_id 
 FROM
     testviewproductcategory                  vwproducts,
     TestSchemaOther.testtablecategories   categ
 WHERE
     vwproducts.category_name = categ.category_name
     AND 
-    (vwproducts.category_name != '' Mountain Bikes ''
-     OR vwproducts.category_name != ''Cruisers Bicycles''
+    (vwproducts.category_name != ' Mountain Bikes '
+     OR vwproducts.category_name != 'Cruisers Bicycles'
      )
      
-    AND vwproducts.product_id = product_id;
-   RETURN columnDoubleResult;
- ';
+    AND vwproducts.product_id =`+ PRODUCT_ID;
+
+  var rs = snowflake.execute( { sqlText: sql_command  } );
+  rs.next()
+  price = rs.getColumnValue(1);
+  return price;
+  $$;
 
 --*************** CREATE FUNCTION*****************************
 
